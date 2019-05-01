@@ -1,0 +1,4 @@
+importFrom(R6, R6Class)
+export(PicSureClient)
+export(PicSureConnection)
+export(PicSureConnectionAPI)
