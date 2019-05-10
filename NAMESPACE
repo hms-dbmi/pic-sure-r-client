@@ -1,4 +1,7 @@
 importFrom(R6, R6Class)
-export(PicSureClient)
+import(httr)
+import(rjson)
+import(stringr)
+export(Client)
 export(PicSureConnection)
 export(PicSureConnectionAPI)

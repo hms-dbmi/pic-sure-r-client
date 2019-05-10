@@ -1,13 +1,16 @@
 Package: PicSureClient
-Title: Package in R to handle connections with a PIC-SURE endpoint.
-Version: 0.1
+Title: Package in R to handle connections with a PIC-SURE endpoint
+Version: 0.1.0
 Authors@R: person("Nick", "Benik", email="nbenik@gmail.com", role = c("aut", "cre"))
 Description: Package in R that handles connections to a PIC-SURE endpoint.
     You will also need a PIC-SURE Resource Adapter to interact with the data resource.
 Depends: R (>= 3.1.0)
-License: Apache-2.0 + file LICENSE
+License: Apache License 2.0
 LazyData: true
 Imports:
-  R6
+  R6,
+  httr,
+  rjson,
+  stringr
 Suggests:
   PicSureHpdsLib
