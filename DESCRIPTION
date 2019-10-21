@@ -1,16 +1,20 @@
-Package: PicSureClient
-Title: Package in R to handle connections with a PIC-SURE endpoint
+Package: picsure
 Version: 0.1.0
-Authors@R: person("Nick", "Benik", email="nbenik@gmail.com", role = c("aut", "cre"))
-Description: Package in R that handles connections to a PIC-SURE endpoint.
-    You will also need a PIC-SURE Resource Adapter to interact with the data resource.
-Depends: R (>= 3.1.0)
-License: Apache License 2.0
+Date: 2019-10-17
+Type: Package
+Title: Simplified R library to connect to PIC-SURE network
+Authors@R: person("Nick", "Benik", role=c("aut","cre"), email="nicholas_benik@hms.harvard.edu")
+Author: Nick Benik [aut, cre]
+Maintainer: Nick Benik <nicholas_benik@hms.harvard.edu>
+Description: Non-RS6 library that is used to connect to a PIC-SURE 
+    network and access various resources (such as HPDS).
+License: GPL (>= 3)
+Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Depends: R (>= 3.1.0)
 Imports:
   R6,
+  jsonlite,
   httr,
-  rjson,
   stringr
-Suggests:
-  PicSureHpdsLib
