@@ -1,3 +1,8 @@
+library(jsonlite)
+library(stringr)
+library(httr)
+
+
 #' R6 class used to establish connections to a PIC-SURE network.
 #'
 #' @docType class
@@ -34,6 +39,8 @@ PicSureClient <- R6::R6Class("PicSureClient",
 #' @docType class
 #' @importFrom R6 R6Class
 #' @import jsonlite
+#' @import stringr
+#' @import httr
 #' @export
 #' @keywords data
 #' @return Object of \code{\link{R6Class}} with methods for connecting to PIC-SURE network.
@@ -62,7 +69,6 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      self$token <- token
                                    },
                                    about = function(resourceId = FALSE) {
-                                     # TODO: implement this
                                      urlstr = paste(self$url, "info", sep="")
                                      if (resourceId != FALSE) {
                                        urlstr = paste(urlstr, resourceId, sep="/")
@@ -79,17 +85,8 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      }
                                    },
                                    list = function() {
-                                     writeLines("Connection$list()\n")
-                                     entries <- jsonlite::fromJSON(self$about(), auto_unbox=TRUE)
-                                     for (rec in entries) {
-                                       writeLines(c(rec$uuid, " -> ", rec$name), sep="")
-                                     }
-                                   },
-                                   getInfo = function() {
-                                     writeLines("Connection$getInfo()\n")
-                                   },
-                                   getResources = function() {
-                                     writeLines("Connection$getResources()\n")
+                                     entries <- jsonlite::fromJSON(self$about())
+                                     return (entries)
                                    },
                                    INTERNAL_api_obj = function() {
                                      return(PicSureConnectionAPI$new(self$url, self$token))
@@ -103,6 +100,8 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
 #' @docType class
 #' @importFrom R6 R6Class
 #' @import jsonlite
+#' @import stringr
+#' @import httr
 #' @export
 #' @keywords data
 #' @return Object of \code{\link{R6Class}} with methods for connecting to PIC-SURE network.
@@ -127,7 +126,22 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         self$url <- url
                                         self$token <- token
                                       },
-                                      info = function(resource_uuid) { writeLines(resource_uuid) },
+                                      info = function(resource_uuid  = FALSE) {
+                                        urlstr = paste(self$url, "info", sep="")
+                                        if (resourceId != FALSE) {
+                                          urlstr = paste(urlstr, resourceId, sep="/")
+                                        } else {
+                                          urlstr = paste(urlstr, "resources", sep="/")
+                                        }
+                                        request = GET(urlstr, content_type_json(), accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
+                                        if (request$status_code != 200) {
+                                          writeLines("ERROR: HTTP response was bad")
+                                          print(request)
+                                          return('{"results":{}, error":"True"}')
+                                        } else {
+                                          return(content(request, "text"))
+                                        }
+                                      },
                                       search = function(resource_uuid, query) {
                                         full_url = paste(self$url, "search", "/", resource_uuid, sep="")
                                         if (query == FALSE) {

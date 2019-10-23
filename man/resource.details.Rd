@@ -19,3 +19,10 @@ A string containing details of the requested Resource.
 \description{
 Get the details of a PIC-SURE resource.
 }
+\examples{
+
+#   myconn = picsure::connect(url="http://your.pic-sure.server/PIC-SURE/", token="your-security-token")
+#   resources = picsure::list.resources(myconn)
+#   picsure::resource.details(connection=myconn, resources[0])
+
+}
