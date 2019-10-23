@@ -81,7 +81,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                        print(request)
                                        return('{"results":{}, error":"True"}')
                                      } else {
-                                       return(content(request, "text"))
+                                       return(content(request, type="text"))
                                      }
                                    },
                                    list = function() {
@@ -139,7 +139,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                           print(request)
                                           return('{"results":{}, error":"True"}')
                                         } else {
-                                          return(content(request, "text"))
+                                          return(content(request, type="text"))
                                         }
                                       },
                                       search = function(resource_uuid, query) {
@@ -155,7 +155,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                           print(request)
                                           return('{"results":{}, error":"True"}')
                                         } else {
-                                          return(content(request, text))
+                                          return(content(request, type="text"))
                                         }
                                       },
                                       asynchQuery = function(resource_uuid, query) {
@@ -174,7 +174,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                           print(request)
                                           return('{"results":{}, error":"True"}')
                                         } else {
-                                          return(content(request, text))
+                                          return(content(request, type="text"))
                                         }
                                       },
                                       queryStatus = function(resource_uuid, query_uuid) { writeLines(c(resource_uuid, query_uuid)) },
