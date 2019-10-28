@@ -79,7 +79,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      if (request$status_code != 200) {
                                        writeLines("ERROR: HTTP response was bad")
                                        print(request)
-                                       return('{"results":{}, error":"True"}')
+                                       return('{"results":{}, "error":"True"}')
                                      } else {
                                        return(content(request, type="text"))
                                      }
@@ -137,7 +137,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         if (request$status_code != 200) {
                                           writeLines("ERROR: HTTP response was bad")
                                           print(request)
-                                          return('{"results":{}, error":"True"}')
+                                          return('{"results":{}, "error":"True"}')
                                         } else {
                                           return(content(request, type="text"))
                                         }
@@ -153,7 +153,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         if (request$status_code != 200) {
                                           writeLines("ERROR: HTTP response was bad")
                                           print(request)
-                                          return('{"results":{}, error":"True"}')
+                                          return('{"results":{}, "error":"True"}')
                                         } else {
                                           return(content(request, type="text"))
                                         }
@@ -172,7 +172,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         if (request$status_code != 200) {
                                           writeLines("ERROR: HTTP response was bad")
                                           print(request)
-                                          return('{"results":{}, error":"True"}')
+                                          return('{"results":{}, "error":"True"}')
                                         } else {
                                           return(content(request, type="text"))
                                         }
