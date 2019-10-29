@@ -62,7 +62,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                    initialize = function(url, token) {
                                      # TODO: trim and make sure URL ends in "/"
                                      endpoint <- str_trim(url)
-                                     if (str_detect(endpoint, "/$") == FALSE) {
+                                     if (isFALSE(str_detect(endpoint, "/$"))) {
                                        endpoint <- paste(endpoint, "/", sep="")
                                      }
                                      self$url <- endpoint
@@ -70,7 +70,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                    },
                                    about = function(resourceId = FALSE) {
                                      urlstr = paste(self$url, "info", sep="")
-                                     if (resourceId != FALSE) {
+                                     if (!(isFALSE(resourceId))) {
                                        urlstr = paste(urlstr, resourceId, sep="/")
                                      } else {
                                        urlstr = paste(urlstr, "resources", sep="/")
@@ -126,9 +126,9 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         self$url <- url
                                         self$token <- token
                                       },
-                                      info = function(resource_uuid  = FALSE) {
+                                      info = function(resource_uuid = FALSE) {
                                         urlstr = paste(self$url, "info", sep="")
-                                        if (resourceId != FALSE) {
+                                        if (!(isFALSE(resourceId))) {
                                           urlstr = paste(urlstr, resourceId, sep="/")
                                         } else {
                                           urlstr = paste(urlstr, "resources", sep="/")
@@ -144,7 +144,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                       },
                                       search = function(resource_uuid, query) {
                                         full_url = paste(self$url, "search", "/", resource_uuid, sep="")
-                                        if (query == FALSE) {
+                                        if (isFALSE(query)) {
                                           query <- list()
                                           query$query <- ""
                                           query = jsonlite::toJSON(query, auto_unbox=TRUE)
@@ -163,7 +163,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                       },
                                       synchQuery = function(resource_uuid, query) {
                                         full_url = paste(self$url, "query/sync/", resource_uuid, sep="")
-                                        if (query == FALSE) {
+                                        if (isFALSE(query)) {
                                           query <- list()
                                           query$query <- ""
                                           query = jsonlite::toJSON(query, auto_unbox=TRUE)
