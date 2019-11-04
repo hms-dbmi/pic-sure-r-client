@@ -162,7 +162,7 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         writeLines(c(resource_uuid, query))
                                       },
                                       synchQuery = function(resource_uuid, query) {
-                                        full_url = paste(self$url, "query/sync/", resource_uuid, sep="")
+                                        full_url = paste(self$url, "query/sync/", sep="")
                                         if (isFALSE(query)) {
                                           query <- list()
                                           query$query <- ""
