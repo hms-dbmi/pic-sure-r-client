@@ -4,3 +4,5 @@ Use our R client library to integrate your R application with PIC-SURE API resou
 TBD
 ## Usage
 TBD
+## Supported R Versions
+TBD
