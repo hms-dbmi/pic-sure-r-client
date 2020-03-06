@@ -111,6 +111,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
 #'   \item{Documentation}{For full documentation of each method go to https://github.com/hms-dbmi/pic-sure-r-client}
 #'   \item{\code{new(url, token)}}{This method is used to create object of this class.}
 #'
+#'   \item{\code{profile()}}{This method is used by other packages...}
 #'   \item{\code{info(resource_uuid)}}{This method is used by other packages...}
 #'   \item{\code{search(resource_uuid, query)}}{This method is used by other packages...}
 #'   \item{\code{asynchQuery(resource_uuid, query)}}{This method is used by other packages...}
@@ -125,6 +126,19 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         # TODO: trim and make sure URL ends in "/"
                                         self$url <- url
                                         self$token <- token
+                                      },
+                                      profile = function() {
+                                        psama_url = unlist(strsplit(self$url, "/"))
+                                        url_len = length(psama_url) - 1
+                                        psama_url = paste(c(psama_url[1:url_len], "psama", "user", "me"), collapse="/")
+                                        request = GET(psama_url, content_type_json(), accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
+                                        if (request$status_code != 200) {
+                                          writeLines("ERROR: HTTP response was bad")
+                                          print(request)
+                                          return('{"results":{}, "error":"True"}')
+                                        } else {
+                                          return(content(request, type="text", encoding="UTF-8"))
+                                        }
                                       },
                                       info = function(resource_uuid = FALSE) {
                                         urlstr = paste(self$url, "info", sep="")
