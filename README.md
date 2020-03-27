@@ -20,4 +20,4 @@ TBD
 ## Supported R Versions
 TBD
 ## Additional Resources
-* [PIC-SURE HPDS R Client](https://github.com/hms-dbmi/pic-sure-r-adapter-hpds "PIC-SURE HPDS R Library")
+* [PIC-SURE HPDS R Client](https://github.com/hms-dbmi/pic-sure-r-adapter-hpds "PIC-SURE HPDS R Client")
