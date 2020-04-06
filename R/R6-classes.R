@@ -217,9 +217,14 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                           return(content(request, type="text", encoding="UTF-8"))
                                         }
                                       },
-                                      queryStatus = function(resource_uuid, query_uuid) { 
+                                      queryStatus = function(resource_uuid, query_uuid, query_body = NA) { 
                                         urlstr = paste(self$url_picsure, "query/", query_uuid, "/status", sep="")
-                                        request = POST(urlstr, body="{}", content_type_json(), accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
+                                        if (is.na(query_body)) {
+                                          query_json = "{}"
+                                        } else {
+                                          query_json = query_body
+                                        }
+                                        request = POST(urlstr, body=query_json, content_type_json(), accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
                                         if (request$status_code != 200) {
                                           writeLines("ERROR: HTTP response was bad")
                                           print(request)
