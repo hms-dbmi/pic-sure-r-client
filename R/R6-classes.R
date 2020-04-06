@@ -74,9 +74,11 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      url_df$path = str_flatten(temp_path[[1]], collapse="/")
                                      self$url_psama = urltools::url_compose(url_df)
                                      self$token <- token
+                                     self$resource_uuids = self$list()
+                                     print(self$resource_uuids)
                                    },
                                    about = function(resourceId = FALSE) {
-                                     urlstr = paste(self$url, "info", sep="")
+                                     urlstr = paste(self$url_picsure, "info", sep="")
                                      if (!(isFALSE(resourceId))) {
                                        urlstr = paste(urlstr, resourceId, sep="/")
                                      } else {
@@ -84,9 +86,12 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      }
                                      request = GET(urlstr, content_type_json(), accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
                                      if (request$status_code != 200) {
-                                       writeLines("ERROR: HTTP response was bad")
-                                       print(request)
-                                       return('{"results":{}, "error":"True"}')
+                                       if (request$status_code == 401) {
+                                         stop("ERROR: Bad security credentials.")
+                                       } else {
+                                         print(request)
+                                         stop("ERROR: HTTP(S) Failed")
+                                       }
                                      } else {
                                        return(content(request, type="text", encoding = "UTF-8"))
                                      }
