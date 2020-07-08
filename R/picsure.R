@@ -19,8 +19,8 @@ NULL
 #'#   myconn = picsure::connect(url="http://your.pic-sure.server/PIC-SURE/", token="your-security-token")
 #'
 #' @export
-connect <- function(url, token, verbose=FALSE) {
-  result = PicSureConnection$new(url, token)
+connect <- function(url, token, psama_url=FALSE, verbose=FALSE) {
+  result = PicSureConnection$new(url, token, psama_url)
   class(result) <- "PicSure_Connection"
   return (result)
 }
