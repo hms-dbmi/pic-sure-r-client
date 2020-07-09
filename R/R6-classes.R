@@ -62,6 +62,9 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                  lock_objects = FALSE,
                                  public = list(
                                    initialize = function(url, token, psama_url=FALSE) {
+                                     print(url)
+                                     print(psama_url)
+                                     print(isFALSE(psama_url))
                                      url_df = urltools::url_parse(url)
                                      url_df$path <- str_trim(url_df$path)
                                      if (isFALSE(str_detect(url_df$path, "/$"))) {
@@ -85,6 +88,8 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      self$token <- token
                                      self$resource_uuids = self$list()
                                      print(self$resource_uuids)
+                                     print(self$url_psama)
+                                     print(self$url_picsure)
                                    },
                                    about = function(resourceId = FALSE) {
                                      urlstr = paste(self$url_picsure, "info", sep="")
