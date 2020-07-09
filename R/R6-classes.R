@@ -62,15 +62,15 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                  lock_objects = FALSE,
                                  public = list(
                                    initialize = function(url, token, psama_url=FALSE) {
-                                     print(url)
-                                     print(psama_url)
-                                     print(isFALSE(psama_url))
+                                     # Safely parse and set url_picsure for this instance of the PicSureConnection
                                      url_df = urltools::url_parse(url)
                                      url_df$path <- str_trim(url_df$path)
                                      if (isFALSE(str_detect(url_df$path, "/$"))) {
                                        url_df$path <- paste(url_df$path, "/", sep="")
                                      }
                                      self$url_picsure = urltools::url_compose(url_df)
+
+                                     # Safely parse and set the url_psama for this instance of PicSureConnection
                                      temp_path = str_split(url_df$path, "/")
                                      url_len = length(temp_path)
                                      temp_path[[1]][[url_len]] = "psama"
@@ -78,7 +78,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      if (isFALSE(psama_url)) {
                                          self$url_psama = urltools::url_compose(url_df)
                                      }else{
-                                         psama_url_df = urltools::url_parse(url)
+                                         psama_url_df = urltools::url_parse(psama_url)
                                          psama_url_df$path <- str_trim(psama_url_df$path)
                                          if (isFALSE(str_detect(psama_url_df$path, "/$"))) {
                                            psama_url_df$path <- paste(psama_url_df$path, "/", sep="")
