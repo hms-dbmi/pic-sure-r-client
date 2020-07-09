@@ -88,8 +88,6 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      self$token <- token
                                      self$resource_uuids = self$list()
                                      print(self$resource_uuids)
-                                     print(self$url_psama)
-                                     print(self$url_picsure)
                                    },
                                    about = function(resourceId = FALSE) {
                                      urlstr = paste(self$url_picsure, "info", sep="")
