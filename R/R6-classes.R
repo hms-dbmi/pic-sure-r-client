@@ -243,6 +243,17 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                         } else {
                                           return(content(request, type="text", encoding="UTF-8"))
                                         }
+                                      },
+                                      queryMetadata = function(query_uuid) { 
+                                        urlstr = paste(self$url_picsure, "query/", query_uuid, "/metadata", sep="")
+                                        request = GET(urlstr, accept_json(), add_headers(Authorization=paste('Bearer',self$token)))
+                                        if (request$status_code != 200) {
+                                          writeLines("ERROR: HTTP response was bad")
+                                          print(request)
+                                          return('{"results":{}, "error":"True"}')
+                                        } else {
+                                          return(content(request, type="text", encoding="UTF-8"))
+                                        }
                                       }
                                     )
 )
