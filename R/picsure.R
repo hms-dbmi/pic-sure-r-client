@@ -19,8 +19,26 @@ NULL
 #'#   myconn = picsure::connect(url="http://your.pic-sure.server/PIC-SURE/", token="your-security-token")
 #'
 #' @export
-connect <- function(url, token, verbose=FALSE) {
-  result = PicSureConnection$new(url, token)
+connect <- function(url, token, psama_url=FALSE, verbose=FALSE) {
+  result = PicSureConnection$new(url, token, psama_url)
+  class(result) <- "PicSure_Connection"
+  return (result)
+}
+
+#' Create a connection to a PIC-SURE All-in-one Local network.
+#'
+#' @param token A security token to access the endpoint.
+#' @param verbose (optional) set to TRUE to get debugging output
+#'
+#' @examples
+#'
+#'#   myconn = picsure::connect(token="your-security-token")
+#'
+#' @export
+connect_local <- function(token, verbose=FALSE) {
+  result = PicSureConnection$new("http://wildfly:8080/pic-sure-api-2/PICSURE/", 
+                                 token, 
+                                 "http://wildfly:8080/pic-sure-auth-services/auth/")
   class(result) <- "PicSure_Connection"
   return (result)
 }
