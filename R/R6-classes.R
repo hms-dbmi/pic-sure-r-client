@@ -269,3 +269,8 @@ PicSureConnectionAPI <- R6::R6Class("PicSureConnectionAPI",
                                       }
                                     )
 )
+
+if (as.integer(version$major) <= 3 &&
+  as.integer(strsplit(version$minor, ".", fixed = TRUE)[[1]][1]) <= 4) {
+  isFALSE <- function(x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
+}
