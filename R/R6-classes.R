@@ -68,6 +68,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      if (isFALSE(str_detect(url_df$path, "/$"))) {
                                        url_df$path <- paste(url_df$path, "/", sep="")
                                      }
+                                     
                                      self$url_picsure = urltools::url_compose(url_df)
 
                                      # Safely parse and set the url_psama for this instance of PicSureConnection
@@ -87,7 +88,12 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      }
                                      self$token <- token
                                      self$resource_uuids = self$list()
+                                     # display the list of resources found
                                      print(self$resource_uuids)
+                                     # make sure the list of resources is an array of just the UUIDs
+                                     if (typeof(self$resource_uuids) == 'list') {
+                                       self$resource_uuids = names(self$resource_uuids)
+                                     }
                                    },
                                    about = function(resourceId = FALSE) {
                                      urlstr = paste(self$url_picsure, "info", sep="")
