@@ -91,7 +91,7 @@ PicSureConnection <- R6::R6Class("PicSureConnection",
                                      # display the list of resources found
                                      print(self$resource_uuids)
                                      # make sure the list of resources is an array of just the UUIDs
-                                     if (typeof(self$resource_uuids) == list) {
+                                     if (typeof(self$resource_uuids) == 'list') {
                                        self$resource_uuids = names(self$resource_uuids)
                                      }
                                    },
