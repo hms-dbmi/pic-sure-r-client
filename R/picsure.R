@@ -20,6 +20,7 @@ NULL
 #'
 #' @export
 connect <- function(url, token, psama_url=FALSE, verbose=FALSE) {
+  deprecationMessage()
   result = PicSureConnection$new(url, token, psama_url)
   class(result) <- "PicSure_Connection"
   return (result)
@@ -36,6 +37,7 @@ connect <- function(url, token, psama_url=FALSE, verbose=FALSE) {
 #'
 #' @export
 connect_local <- function(token, verbose=FALSE) {
+  deprecationMessage()
   result = PicSureConnection$new("http://wildfly:8080/pic-sure-api-2/PICSURE/", 
                                  token, 
                                  "http://wildfly:8080/pic-sure-auth-services/auth/")
@@ -83,4 +85,8 @@ resource.details <- function(connection, resourceUUID, verbose=FALSE) {
     message("Invalid connection was passed to resource.details() function")
     stop()
   }
+}
+
+deprecationMessage = function() {
+  message("This branch of the package is deprecated and will not be supported past March 31st, 2023. Please build this package from the main branch of 'hms-dbmi/pic-sure-r-adapter-hpds' for the updated functionality. If you have questions, feel free to contact our helpdesk: http://avillachlabsupport.hms.harvard.edu/.")
 }
