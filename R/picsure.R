@@ -88,5 +88,5 @@ resource.details <- function(connection, resourceUUID, verbose=FALSE) {
 }
 
 deprecationMessage = function() {
-  message("This branch of the package is deprecated and will not be supported past March 31st, 2023. Please build this package from the main branch of 'hms-dbmi/pic-sure-r-adapter-hpds' for the updated functionality. If you have questions, feel free to contact our helpdesk: http://avillachlabsupport.hms.harvard.edu/.")
+  message("This branch of the package is deprecated and will not be supported past August 31st, 2023. Please build this package from the main branch of 'hms-dbmi/pic-sure-r-adapter-hpds' for the updated functionality. If you have questions, feel free to contact our helpdesk: http://avillachlabsupport.hms.harvard.edu/. For example usage of the latest version of the package, see the examples here: https://github.com/hms-dbmi/Access-to-Data-using-PIC-SURE-API .")
 }
